@@ -1,15 +1,18 @@
 -------------------------------------------------
--- Ultimate Sinescroller Demo		
--- By: fleg
+-- batalha server for IHM & TSWI
+-- By: luisfcorreia
 -------------------------------------------------
 
+require("LUBE.lua")
+
 function love.load()
---	muzac = love.audio.newSource("labyrinth.mod");
---	love.audio.play(muzac, 0);
+--	muzik = love.audio.newSource("musica.ogg");
+--	love.audio.play(muzik, 0);
+
 end
 
 function love.update(dt)
-	
+  lube.server:update(dt)
 end
 
 function love.draw()
