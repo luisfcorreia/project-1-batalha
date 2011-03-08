@@ -10,7 +10,7 @@ function love.load()
 --	muzik = love.audio.newSource("musica.ogg");
 --	love.audio.play(muzik, 0);
 
-	lube.server:Init(8118,"tcp")
+	lube.server:Init(8169,"tcp")
 	lube.server:setPing(true, 2, "PING!")
 	lube.server:setHandshake("#batalha*")
 	lube.server:setCallback(updatedata, connect, disconnect)
