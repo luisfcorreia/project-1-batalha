@@ -28,6 +28,7 @@ function love.load()
     s_x = 400
     s_y = 240
 	
+	love.graphics.setLine(5,"smooth")
 end
 
 function love.update(dt)
