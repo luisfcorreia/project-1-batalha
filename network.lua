@@ -1,3 +1,8 @@
+-----------------------------------------------------------
+-- 2011 IHM - Universidade Atlântica
+--
+-- network.lua
+-----------------------------------------------------------
 require("LUBE.lua")
 
 function connect(ip, port)
@@ -23,7 +28,9 @@ end
 
 function updatedata(data, ip, port)
 	-- processar os dados que vem do android
-	texto = data
+	texto = tonumber(data)
+	if texto > 89 then
+		texto = 90
+	end
 end
-
 

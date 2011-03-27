@@ -1,3 +1,8 @@
+-----------------------------------------------------------
+-- 2011 IHM - Universidade Atlântica
+--
+-- objects.lua
+-----------------------------------------------------------
 function create_object_belt1()
 	-- -----------------------------------------------------------------------------------------------------
 	Belt = Object:new()
@@ -191,7 +196,6 @@ function create_object_tank2()
 		self.belt:update(dt)
 	end
 
-
 	Tank2.draw = function(self)
 		love.graphics.draw(images.turret_cannon_00, self.x+30, self.y-60,(texto-180)*rad,self.scale,self.scale,32,32)
 		love.graphics.draw(images.turret_body, self.x-12, self.y-110)--,0,self.scale,self.scale,32,32)
@@ -234,8 +238,8 @@ function create_object_bubble()
 
 	Bubble.new = function(self)
 		local o = {}
-		o.x = 400
-		o.y = 200
+		o.x = 40
+		o.y = 20
 		o.angle = 0
 		setmetatable(o, Bubble)
 		return o
@@ -248,7 +252,7 @@ function create_object_bubble()
 	Bubble.draw = function(self)
 		local yv = math.sin(self.angle)*5
 		love.graphics.draw(images.bubble, self.x, self.y+yv)
-		love.graphics.draw(images.ownip, self.x+8, self.y+yv+95)
+		love.graphics.draw(images.ownip, self.x+94, self.y+yv+84,0,1,1,1,1)
 	end
 end
 
