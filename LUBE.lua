@@ -429,7 +429,8 @@ end
 -- @see lube.server:Init
 -- @name lube.server:startserver
 function lube.server.udp:startserver(port)
-	self.socket:setsockname("*", port)
+--	self.socket:setsockname("*", port)
+	self.socket:setsockname("", port)
 end
 
 function lube.server.tcp:receive()

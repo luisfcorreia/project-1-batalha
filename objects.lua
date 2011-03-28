@@ -34,26 +34,39 @@ function create_object_belt1()
 		return o
 	end
 
-	Belt.update = function(self, dt)
+	Belt.update = function(self, dir, dt)
 		for i,b in ipairs(self.teeth) do
 			b.t = b.t + dt
-
+			local pi
+			if dir == 1 then
+				pi = math.pi
+			else
+				pi = -math.pi
+			end
 			if b.t < self.th then
 				local t = b.t
 				b.x = self.x + self.w * (t/self.th)
-				b.y = self.y
+				if dir == 1 then
+					b.y = self.y
+				else
+					b.y = self.y + self.d
+				end
 			elseif b.t < self.th + self.ta then
 				local t = (self.th + self.ta - b.t)
-				b.x = self.x + self.w + math.cos(-math.pi*t + math.pi/2)*self.r
-				b.y = self.y + self.r + math.sin(-math.pi*t + math.pi/2)*self.r
+				b.x = self.x + self.w + math.cos(-pi*t + pi/2)*self.r
+				b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
 			elseif b.t < self.th*2 + self.ta then
 				local t = (b.t - self.th*2 + self.ta)/self.th
 				b.x = self.x + self.w * (2-t)
-				b.y = self.y + self.d
+				if dir == 1 then
+					b.y = self.y + self.d
+				else
+					b.y = self.y
+				end
 			elseif b.t < self.total then
 				local t = (self.th*2 + self.ta - b.t)
-				b.x = self.x + math.cos(-math.pi*t + math.pi/2)*self.r
-				b.y = self.y + self.r + math.sin(-math.pi*t + math.pi/2)*self.r
+				b.x = self.x + math.cos(-pi*t + pi/2)*self.r
+				b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
 			else
 				b.t = b.t - self.total
 			end
@@ -73,7 +86,7 @@ function create_object_belt2()
 	Belt2.__index = Belt2
 	setmetatable(Belt2, Object)
 
-	Belt2.new = function(self, n)
+	Belt2.new = function(self, n,x)
 
 		local o = {}
 
@@ -81,7 +94,7 @@ function create_object_belt2()
 		o.d = o.r*2
 		o.half_c = math.pi*o.r
 		o.c = 2*o.half_c
-		o.x = 200
+		o.x = x
 		o.y = 300
 		o.th = 1
 		o.ta = 1
@@ -153,7 +166,7 @@ function create_object_tank1()
 
 	Tank.update = function(self, dt)
 		self.angle = self.angle + dt * math.pi/2
-		self.belt:update(dt)
+		self.belt:update(game_direction,dt)
 	end
 
 	Tank.draw = function(self)
@@ -180,7 +193,7 @@ function create_object_tank2()
 		o.x = 650
 		o.y = 414
 		o.i = 49
-		o.belt = Belt2:new(30)
+		o.belt = Belt:new(30)
 		o.belt.x = o.x-7
 		o.belt.y = o.y-37
 		o.angle = 0
@@ -193,7 +206,7 @@ function create_object_tank2()
 	Tank2.update = function(self, dt)
 		self.angle = self.angle + dt * math.pi/2
 		self.angle2 = self.angle2 + dt * -math.pi/2
-		self.belt:update(dt)
+		self.belt:update(game_direction,dt)
 	end
 
 	Tank2.draw = function(self)
@@ -373,7 +386,12 @@ function init_object_structs()
 
 	Object.draw = function(self)
 		if self.image then
-			local x = self.x + self.dx*self.t
+			local x = self.x
+			if game_direction == 1 then
+				x = self.x + self.dx*self.t
+			else
+				x = self.x - self.dx*self.t
+			end
 			local y = self.y + self.dy*self.t
 			local r = self.r*self.t
 			love.graphics.setColor(255, 255, 255, self.alpha)

@@ -3,7 +3,18 @@
 --
 -- network.lua
 -----------------------------------------------------------
+-- 20110328 21:18 <bartbes> I like where this is going, QR codes for connecting androids
+
 require("LUBE.lua")
+
+function server_start(port)
+	lube.server:Init(port,"tcp")
+	lube.server:setPing(true, 2, "PING!")
+	lube.server:setHandshake("#batalha*")
+	lube.server:setCallback(updatedata, connect, disconnect)
+	myownIP= lube.server.socket:getsockname()
+
+end
 
 function connect(ip, port)
 	numclients = numclients + 1

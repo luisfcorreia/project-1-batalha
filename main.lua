@@ -3,22 +3,15 @@
 --
 -- main.lua
 -----------------------------------------------------------
+require("globals.lua")
 require("LUBE.lua")
 require("objects.lua")
 require("network.lua")
 
 function love.load()
 
-	lube.server:Init(8169,"tcp")
-	lube.server:setPing(true, 2, "PING!")
-	lube.server:setHandshake("#batalha*")
-	lube.server:setCallback(updatedata, connect, disconnect)
+	server_start(8169)
 
-	rad = 0.0174532925
-	texto = 0
-	gamestate = "menu"
-	gamestate = "running"
-	
 	love.graphics.setBackgroundColor(0x84, 0xca, 0xff)
 
 	load_images()
@@ -58,6 +51,19 @@ function love.load()
 		v:update(10)
 	end
 
+end
+
+function love.keypressed(k)
+    if k == ' ' then
+    	if game_direction == 1 then
+    		game_direction = 0
+    	else
+	    	game_direction = 1
+	    end
+    end
+    if k == 'escape' then
+        love.event.push('q') -- quit the game
+    end
 end
 
 function love.update(dt)
@@ -104,6 +110,7 @@ function love.draw()
 		love.graphics.setColor(205, 227, 161)
 		love.graphics.rectangle("fill", 0, 450, 800, 10)
 		love.graphics.setColor(255, 255, 255)
+		love.graphics.print(myownIP,10,10)
 		-- draw foreground objects
 		lists.f:draw()
 		--
