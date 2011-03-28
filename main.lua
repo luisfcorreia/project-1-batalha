@@ -1,10 +1,9 @@
 -----------------------------------------------------------
 -- 2011 IHM - Universidade Atlântica
---
+-- (C) Luis Correia
 -- main.lua
 -----------------------------------------------------------
 require("globals.lua")
-require("LUBE.lua")
 require("objects.lua")
 require("network.lua")
 
@@ -18,8 +17,7 @@ function love.load()
 
 	init_object_structs()
 
-	create_object_belt1()
-	create_object_belt2()
+	create_object_belt()
 	create_object_tank1()
 	create_object_tank2()
 	create_object_cloud()

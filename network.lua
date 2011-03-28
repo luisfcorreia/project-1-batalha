@@ -1,6 +1,6 @@
 -----------------------------------------------------------
 -- 2011 IHM - Universidade Atlântica
---
+-- (C) Luis Correia
 -- network.lua
 -----------------------------------------------------------
 -- 20110328 21:18 <bartbes> I like where this is going, QR codes for connecting androids
@@ -39,9 +39,9 @@ end
 
 function updatedata(data, ip, port)
 	-- processar os dados que vem do android
-	texto = tonumber(data)
-	if texto > 89 then
-		texto = 90
+	turret_angle = tonumber(data)
+	if turret_angle > 89 then
+		turret_angle = 90
 	end
 end
 
