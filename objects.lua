@@ -155,14 +155,15 @@ function create_object_cloud()
 	Cloud.new = function(self)
 		local o = {}
 		o.image = images["cloud_plain_"..tostring(math.random(1,5))]
-		o.x = 800 + math.random(0, 800)
+		o.x = 800
 		o.y = math.random(0, 150)
 		o.alpha = math.random(64, 248)
 		o.scale = 1/math.random(1, 4)
-		o.xt = -700;
+		o.xt = -200;
 		o.dx = o.xt - o.x
 		o.speed = math.random(10, 160)
 		o.duration = -o.dx/o.speed
+		o.l = 1
 		
 		setmetatable(o, Cloud)
 		return o
@@ -303,9 +304,17 @@ function init_object_structs()
 	end
 
 	Object.update = function(self, dt)
-		self.passed = self.passed + dt
+		if game_direction == 1 then
+			self.passed = self.passed + dt
+		else
+			self.passed = self.passed - dt
+		end
 		while self.passed > self.duration do
-			self.passed = self.passed - self.duration
+			if game_direction == 1 then
+				self.passed = self.passed - self.duration
+			else
+				self.passed = self.passed + self.duration
+			end
 		end
 		self.t = self.passed/self.duration
 	end
@@ -313,11 +322,7 @@ function init_object_structs()
 	Object.draw = function(self)
 		if self.image then
 			local x = self.x
-			if game_direction == 1 then
-				x = self.x + self.dx*self.t
-			else
-				x = self.x - self.dx*self.t
-			end
+			x = self.x + self.dx*self.t
 			local y = self.y + self.dy*self.t
 			local r = self.r*self.t
 			love.graphics.setColor(255, 255, 255, self.alpha)

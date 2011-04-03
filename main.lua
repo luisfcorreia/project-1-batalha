@@ -57,6 +57,8 @@ function love.keypressed(k)
     		game_direction = 0
     	else
 	    	game_direction = 1
+	    	
+	    	
 	    end
     end
     if k == 'escape' then
