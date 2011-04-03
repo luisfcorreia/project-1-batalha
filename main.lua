@@ -40,7 +40,7 @@ function love.load()
 		t:insert(lists.f)
 	end
 	
-	for i=1,15 do
+	for i=1,25 do
 		local t = Cloud:new()
 		t:insert(lists.b)
 	end

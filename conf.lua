@@ -11,7 +11,7 @@ function love.conf(t)
 	t.modules.joystick = false
 	t.modules.native = false
 	t.modules.font = true
-	t.screen.width = 1200
-	t.screen.height = 500
+	t.screen.width = 800
+	t.screen.height = 480
 end
 

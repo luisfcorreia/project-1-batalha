@@ -156,7 +156,7 @@ function create_object_cloud()
 		local o = {}
 		o.image = images["cloud_plain_"..tostring(math.random(1,5))]
 		o.x = 800
-		o.y = math.random(0, 150)
+		o.y = math.random(0, 140)
 		o.alpha = math.random(64, 248)
 		o.scale = 1/math.random(1, 4)
 		o.xt = -200;
