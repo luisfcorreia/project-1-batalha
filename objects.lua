@@ -13,7 +13,7 @@ function create_object_belt()
 
 		local o = {}
 
-		o.r = 30
+		o.r = 15
 		o.d = o.r*2
 		o.half_c = math.pi*o.r
 		o.c = 2*o.half_c
@@ -23,6 +23,7 @@ function create_object_belt()
 		o.ta = 1
 		o.w = o.th*o.half_c
 		o.total = o.th*2+o.ta*2
+		o.scale = 0.5
 		o.teeth = {}
 
 		for i=0,n-1 do
@@ -75,7 +76,7 @@ function create_object_belt()
 
 	Belt.draw = function(self)
 		for i,b in ipairs(self.teeth) do
-			love.graphics.draw(images.belt_tooth, b.x, b.y)
+			love.graphics.draw(images.belt_tooth, b.x, b.y, 0, self.scale,self.scale,1,1)
 		end
 	end
 end
@@ -88,12 +89,13 @@ function create_object_tank1()
 
 	Tank.new = function(self)
 		local o = {}
-		o.x = 50
-		o.y = 414
-		o.i = 49
+		o.x = 10
+		o.y = 416
+		o.i = 25
 		o.belt = Belt:new(30)
-		o.belt.x = o.x-7
-		o.belt.y = o.y-37
+		o.belt.x = o.x+14
+		o.belt.y = o.y-3
+		o.scale = 0.5
 		setmetatable(o, Tank)
 		return o
 	end
@@ -103,12 +105,12 @@ function create_object_tank1()
 	end
 
 	Tank.draw = function(self)
-		love.graphics.draw(images.turret_cannon_00, self.x+80, self.y-60,(turret_angle)*-rad,self.scale,self.scale,32,32)
-		love.graphics.draw(images.turret_body, self.x-12, self.y-110)
-		love.graphics.draw(images.belt_track, self.belt.x-75, self.belt.y-28)		
-		love.graphics.draw(images.wheel, self.x, self.y, 0,self.scale,self.scale,32,32)
-		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0,self.scale,self.scale,32,32)
-		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0,self.scale,self.scale,32,32)
+		love.graphics.draw(images.turret_cannon_00, self.x+50, self.y-16,(turret_angle)*-rad,self.scale,self.scale,32,32)
+		love.graphics.draw(images.turret_body, self.x+10, self.y-40, 0, self.scale,self.scale,1,1)
+		love.graphics.draw(images.belt_track, self.belt.x-37, self.belt.y-14, 0, self.scale,self.scale,1,1)		
+		love.graphics.draw(images.wheel, self.x, self.y, 0, self.scale,self.scale,1,1)
+		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0, self.scale,self.scale,1,1)
+		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0, self.scale,self.scale,1,1)
 		self.belt:draw()
 	end
 end
@@ -121,12 +123,13 @@ function create_object_tank2()
 
 	Tank2.new = function(self)
 		local o = {}
-		o.x = 650
-		o.y = 414
-		o.i = 49
+		o.x = 710
+		o.y = 416
+		o.i = 25
 		o.belt = Belt:new(30)
-		o.belt.x = o.x-7
-		o.belt.y = o.y-37
+		o.belt.x = o.x+14
+		o.belt.y = o.y-3
+		o.scale = 0.5
 		setmetatable(o, Tank2)
 		return o
 	end
@@ -135,13 +138,14 @@ function create_object_tank2()
 		self.belt:update(game_direction,dt)
 	end
 
+
 	Tank2.draw = function(self)
-		love.graphics.draw(images.turret_cannon_00, self.x+30, self.y-60,(turret_angle-180)*rad,self.scale,self.scale,32,32)
-		love.graphics.draw(images.turret_body, self.x-12, self.y-110)
-		love.graphics.draw(images.belt_track, self.belt.x-74, self.belt.y-28)
-		love.graphics.draw(images.wheel, self.x, self.y, 0,self.scale,self.scale,32,32)
-		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0,self.scale,self.scale,32,32)
-		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0,self.scale,self.scale,32,32)
+		love.graphics.draw(images.turret_cannon_00, self.x+33, self.y-16,(turret_angle-180)*rad,self.scale,self.scale,32,32)
+		love.graphics.draw(images.turret_body, self.x+10, self.y-40, 0, self.scale,self.scale,1,1)
+		love.graphics.draw(images.belt_track, self.belt.x-37, self.belt.y-14, 0, self.scale,self.scale,1,1)		
+		love.graphics.draw(images.wheel, self.x, self.y, 0, self.scale,self.scale,1,1)
+		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0, self.scale,self.scale,1,1)
+		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0, self.scale,self.scale,1,1)
 		self.belt:draw()
 	end
 end
