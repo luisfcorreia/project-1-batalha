@@ -24,6 +24,10 @@ function love.load()
 	create_object_bubble()
 	
 	init_timers()
+	
+   --  Interval value = Animation's Delay time * The number of Animation's frame
+   -- 100 ms * 2 frame = 200 ms (Interval)
+   love.keyboard.setKeyRepeat(5, 75)
 
 	do
 		local t = Bubble:new()
@@ -52,15 +56,44 @@ function love.load()
 end
 
 function love.keypressed(k)
+	local t
     if k == ' ' then
     	if game_direction == 1 then
     		game_direction = 0
     	else
 	    	game_direction = 1
-	    	
-	    	
 	    end
     end
+--    if k == 'up' then
+    
+    if love.keyboard.isDown('up') then
+    	if game_direction == 1 then
+		    turret_angle1 = turret_angle1 + 1
+		    if turret_angle1 >= 90 then
+		    	turret_angle1 = 90
+		    end
+    	else
+		    turret_angle2 = turret_angle2 + 1
+		    if turret_angle2 >= 90 then
+		    	turret_angle2 = 90
+		    end
+	    end
+    end
+    if k == 'down' then
+    	if game_direction == 1 then
+		    turret_angle1 = turret_angle1 - 1
+		    if turret_angle1 <= 0 then
+		    	turret_angle1 = 0
+		    end
+    	else
+		    turret_angle2 = turret_angle2 - 1
+		    if turret_angle2 <= 0 then
+		    	turret_angle2 = 0
+		    end
+	    end
+    end
+
+
     if k == 'escape' then
         love.event.push('q') -- quit the game
     end

@@ -115,7 +115,7 @@ function create_object_tank1()
 	end
 
 	Tank.draw = function(self)
-		tank_draw(self,(turret_angle)*-rad,50)
+		tank_draw(self,(turret_angle1)*-rad,50)
 	end
 end
 
@@ -143,7 +143,7 @@ function create_object_tank2()
 	end
 
 	Tank2.draw = function(self)
-		tank_draw(self,(turret_angle-180)*rad,34)
+		tank_draw(self,(turret_angle2-180)*rad,34)
 	end
 end
 
