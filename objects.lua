@@ -81,6 +81,16 @@ function create_object_belt()
 	end
 end
 
+function tank_draw(self,angle,pos)
+	love.graphics.draw(images.turret_cannon_00, self.x+pos, self.y-16,angle,self.scale,self.scale,32,32)
+	love.graphics.draw(images.turret_body, self.x+10, self.y-40, 0, self.scale,self.scale,1,1)
+	love.graphics.draw(images.belt_track, self.belt.x-37, self.belt.y-14, 0, self.scale,self.scale,1,1)		
+	love.graphics.draw(images.wheel, self.x, self.y, 0, self.scale,self.scale,1,1)
+	love.graphics.draw(images.wheel, self.x+self.i, self.y, 0, self.scale,self.scale,1,1)
+	love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0, self.scale,self.scale,1,1)
+	self.belt:draw()
+end
+
 function create_object_tank1()
 	-- -----------------------------------------------------------------------------------------------------
 	Tank = Object:new()
@@ -105,13 +115,7 @@ function create_object_tank1()
 	end
 
 	Tank.draw = function(self)
-		love.graphics.draw(images.turret_cannon_00, self.x+50, self.y-16,(turret_angle)*-rad,self.scale,self.scale,32,32)
-		love.graphics.draw(images.turret_body, self.x+10, self.y-40, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.belt_track, self.belt.x-37, self.belt.y-14, 0, self.scale,self.scale,1,1)		
-		love.graphics.draw(images.wheel, self.x, self.y, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0, self.scale,self.scale,1,1)
-		self.belt:draw()
+		tank_draw(self,(turret_angle)*-rad,50)
 	end
 end
 
@@ -138,15 +142,8 @@ function create_object_tank2()
 		self.belt:update(game_direction,dt)
 	end
 
-
 	Tank2.draw = function(self)
-		love.graphics.draw(images.turret_cannon_00, self.x+33, self.y-16,(turret_angle-180)*rad,self.scale,self.scale,32,32)
-		love.graphics.draw(images.turret_body, self.x+10, self.y-40, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.belt_track, self.belt.x-37, self.belt.y-14, 0, self.scale,self.scale,1,1)		
-		love.graphics.draw(images.wheel, self.x, self.y, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0, self.scale,self.scale,1,1)
-		self.belt:draw()
+		tank_draw(self,(turret_angle-180)*rad,34)
 	end
 end
 
