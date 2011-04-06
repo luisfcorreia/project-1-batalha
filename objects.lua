@@ -218,7 +218,7 @@ function init_timers()
 	Timer.update = function(self, dt)
 		self.passed = self.passed + dt
 		while self.passed > self.tick do
-			self.passed = self.passed - self.tick
+			self.passed = self.passed + self.tick
 			self.f()
 		end
 	end
@@ -340,6 +340,7 @@ function load_images()
 		"belt_track",
 		"turret_body",
 		"turret_cannon_00",
+		"tree01",
 		"star",
 --		"cloud_plain_1",
 		"cloud_plain_2",
@@ -356,4 +357,20 @@ function load_images()
 		images[v] = love.graphics.newImage(v..".png")
 	end
 end
+
+function update_bullet(side)
+
+end
+
+function new_bullet(side)
+	local o = {}
+	o.image = images["star"]
+	o.x = 50
+	o.y = 400
+	o.speedx = math.random(10, 160)
+	o.speedy = math.random(10, 160)
+
+	return o
+end
+
 

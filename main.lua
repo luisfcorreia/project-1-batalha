@@ -116,6 +116,15 @@ function love.update(dt)
 		for i,v in pairs(lists) do
 			v:update(dt)
 		end
+		
+		if bullet1active == 1 then
+			update_bullet(1)
+		end
+		
+		if bullet2active == 1 then
+			update_bullet(2)
+		end
+		
 		--
 	elseif gamestate == "gamewon" then
 		--
