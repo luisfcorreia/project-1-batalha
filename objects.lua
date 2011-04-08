@@ -203,17 +203,26 @@ function create_object_bullet()
 	Bullet.__index = Bullet
 	setmetatable(Bullet, Object)
 
-	Bullet.new = function(self,angle,force)
+	Bullet.new = function(self,direction,angle,force)
 		local o = {}
-		o.image = images["star"]
-		o.x = 40  
-		o.y = 390 
+		o.image = images["bullet"]
 		o.t = 0
-		o.anglex = math.sin((angle + 90)*rad)
-		o.angley = math.cos((angle + 90)*rad)
+		if direction == 0 then
+			angulo = (270 - angle) * rad
+			bullet2_active = 1
+			o.x = 740  
+			o.y = 388
+		else
+			angulo = (90 + angle) * rad
+			bullet1_active = 1
+			o.x = 50 +25 
+			o.y = 388 
+		end
+		o.scale = 0.5
+		o.anglex = math.sin(angulo)
+		o.angley = math.cos(angulo)
 		o.speedx = force * o.anglex
 		o.speedy = force * o.angley
-		bullet1_active = 1
 		setmetatable(o, Bullet)
 		return o
 	end
@@ -222,15 +231,28 @@ function create_object_bullet()
 		self.x = self.x + (dt + self.speedx)
 		self.y = self.y + (dt + self.speedy)
 		self.speedy = self.speedy + 1
+		self.speedx = self.speedx - 0.1
 
-		if self.x > 810 then
-			bullet1_active = 0
-			self = nil
+		if (self.x > screen_width) or (self.x < 0) then
+			if bullet1_active == 0 then
+				bullet1_active = 0
+			end
+			if bullet2_active == 0 then
+				bullet2_active = 0
+			end
+		end
+		if (self.y > screen_height) or (self.y < 0) then
+			if bullet1_active == 0 then
+				bullet1_active = 0
+			end
+			if bullet2_active == 0 then
+				bullet2_active = 0
+			end
 		end
 	end
 
 	Bullet.draw = function(self)
-		love.graphics.draw(self.image, self.x, self.y)
+		love.graphics.draw(self.image, self.x, self.y,1,self.scale,self.scale)
 	end
 end
 
@@ -380,6 +402,7 @@ function load_images()
 		"turret_cannon_00",
 		"tree01",
 		"star",
+		"bullet",
 --		"cloud_plain_1",
 		"cloud_plain_2",
 		"cloud_plain_3",

@@ -40,8 +40,8 @@ end
 function updatedata(data, ip, port)
 	-- processar os dados que vem do android
 	turret_angle = tonumber(data)
-	if turret_angle > 89 then
-		turret_angle = 90
+	if turret_angle >= turret_max_angle then
+		turret_angle = turret_max_angle
 	end
 end
 

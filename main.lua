@@ -58,7 +58,7 @@ end
 
 function love.keypressed(k)
 	local t
-    if k == ' ' then
+    if love.keyboard.isDown(' ') then
     	if game_direction == 1 then
     		game_direction = 0
     	else
@@ -70,38 +70,51 @@ function love.keypressed(k)
     if love.keyboard.isDown('up') then
     	if game_direction == 1 then
 		    turret_angle1 = turret_angle1 + 1
-		    if turret_angle1 >= 90 then
-		    	turret_angle1 = 90
+		    if turret_angle1 >= turret_max_angle then
+		    	turret_angle1 = turret_max_angle
 		    end
     	else
 		    turret_angle2 = turret_angle2 + 1
-		    if turret_angle2 >= 90 then
-		    	turret_angle2 = 90
+		    if turret_angle2 >= turret_max_angle then
+		    	turret_angle2 = turret_max_angle
 		    end
 	    end
     end
-    if k == 'down' then
+    if love.keyboard.isDown('down') then
     	if game_direction == 1 then
 		    turret_angle1 = turret_angle1 - 1
-		    if turret_angle1 <= 0 then
-		    	turret_angle1 = 0
+		    if turret_angle1 <= turret_min_angle then
+		    	turret_angle1 = turret_min_angle
 		    end
     	else
 		    turret_angle2 = turret_angle2 - 1
-		    if turret_angle2 <= 0 then
-		    	turret_angle2 = 0
+		    if turret_angle2 <= turret_min_angle then
+		    	turret_angle2 = turret_min_angle
 		    end
 	    end
     end
 
-    if k == '1' then
-	if bullet1_active == 0 then
-		local t = Bullet:new(turret_angle1,20)
-		t:insert(lists.x)
-	end    
+    if love.keyboard.isDown('1') then
+    	if game_direction == 1 then
+--			if bullet1_active == 0 then
+				local t = Bullet:new(game_direction,turret_angle1,20)
+				t:insert(lists.x)
+				bullet1_active = 1
+--			end    
+		end    
     end
 
-    if k == 'escape' then
+    if love.keyboard.isDown('2') then
+    	if game_direction == 0 then
+--			if bullet2_active == 0 then
+				local t = Bullet:new(game_direction,turret_angle2,20)
+				t:insert(lists.x)
+				bullet2_active = 1
+--			end    
+		end    
+    end
+
+    if love.keyboard.isDown('escape') then
         love.event.push('q') -- quit the game
     end
 end
@@ -145,6 +158,7 @@ function love.draw()
 		--
 		-- draw background objects
 		lists.b:draw()
+		
 		-- Ground
 		love.graphics.setColor(146, 201, 87)
 		love.graphics.rectangle("fill", 0, 460, 800, 70)
@@ -153,10 +167,13 @@ function love.draw()
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.print(myownIP,10,10)
 
-		-- draw bullets
-		lists.x:draw()
+	
 		-- draw foreground objects
 		lists.f:draw()
+
+		-- draw bullets
+		lists.x:draw()
+		
 
 		--
 	elseif gamestate == "gamewon" then
