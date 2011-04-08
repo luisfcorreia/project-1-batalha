@@ -197,6 +197,43 @@ function create_object_bubble()
 	end
 end
 
+function create_object_bullet()
+	-- -----------------------------------------------------------------------------------------------------
+	Bullet = Object:new()
+	Bullet.__index = Bullet
+	setmetatable(Bullet, Object)
+
+	Bullet.new = function(self,angle,force)
+		local o = {}
+		o.image = images["star"]
+		o.x = 40  
+		o.y = 390 
+		o.t = 0
+		o.anglex = math.sin((angle + 90)*rad)
+		o.angley = math.cos((angle + 90)*rad)
+		o.speedx = force * o.anglex
+		o.speedy = force * o.angley
+		bullet1_active = 1
+		setmetatable(o, Bullet)
+		return o
+	end
+
+	Bullet.update = function(self, dt)
+		self.x = self.x + (dt + self.speedx)
+		self.y = self.y + (dt + self.speedy)
+		self.speedy = self.speedy + 1
+
+		if self.x > 810 then
+			bullet1_active = 0
+			self = nil
+		end
+	end
+
+	Bullet.draw = function(self)
+		love.graphics.draw(self.image, self.x, self.y)
+	end
+end
+
 
 function init_timers()
 	-- -----------------------------------------------------------------------------------------------------
@@ -256,7 +293,8 @@ function init_object_structs()
 
 	lists = {
 		b = List:new(),
-		f = List:new()
+		f = List:new(),
+		x = List:new()
 	}
 
 -- -----------------------------------------------------------------------------------------------------
@@ -356,21 +394,6 @@ function load_images()
 	for i,v in pairs(names) do
 		images[v] = love.graphics.newImage(v..".png")
 	end
-end
-
-function update_bullet(side)
-
-end
-
-function new_bullet(side)
-	local o = {}
-	o.image = images["star"]
-	o.x = 50
-	o.y = 400
-	o.speedx = math.random(10, 160)
-	o.speedy = math.random(10, 160)
-
-	return o
 end
 
 

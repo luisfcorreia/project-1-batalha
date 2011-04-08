@@ -22,6 +22,7 @@ function love.load()
 	create_object_tank2()
 	create_object_cloud()
 	create_object_bubble()
+	create_object_bullet()
 	
 	init_timers()
 	
@@ -93,6 +94,12 @@ function love.keypressed(k)
 	    end
     end
 
+    if k == '1' then
+	if bullet1_active == 0 then
+		local t = Bullet:new(turret_angle1,20)
+		t:insert(lists.x)
+	end    
+    end
 
     if k == 'escape' then
         love.event.push('q') -- quit the game
@@ -115,14 +122,6 @@ function love.update(dt)
 
 		for i,v in pairs(lists) do
 			v:update(dt)
-		end
-		
-		if bullet1active == 1 then
-			update_bullet(1)
-		end
-		
-		if bullet2active == 1 then
-			update_bullet(2)
 		end
 		
 		--
@@ -153,8 +152,12 @@ function love.draw()
 		love.graphics.rectangle("fill", 0, 450, 800, 10)
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.print(myownIP,10,10)
+
+		-- draw bullets
+		lists.x:draw()
 		-- draw foreground objects
 		lists.f:draw()
+
 		--
 	elseif gamestate == "gamewon" then
 		--
