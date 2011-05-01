@@ -6,6 +6,7 @@
 require("globals.lua")
 require("objects.lua")
 require("network.lua")
+require("utils.lua")
 
 function love.load()
 
@@ -96,18 +97,18 @@ function love.keypressed(k)
 
     if love.keyboard.isDown('1') then
     	if game_direction == 1 then
---			if bullet1_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle1,20)
+			if bullet1_active == 0 then
+				local t = Bullet:new(game_direction,turret_angle1,40)
 				t:insert(lists.x)
 				bullet1_active = 1
---			end    
+			end    
 		end    
     end
 
     if love.keyboard.isDown('2') then
     	if game_direction == 0 then
 --			if bullet2_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle2,20)
+				local t = Bullet:new(game_direction,turret_angle2,40)
 				t:insert(lists.x)
 				bullet2_active = 1
 --			end    

@@ -228,26 +228,34 @@ function create_object_bullet()
 	end
 
 	Bullet.update = function(self, dt)
+		local d = 0
 		self.x = self.x + (dt + self.speedx)
 		self.y = self.y + (dt + self.speedy)
-		self.speedy = self.speedy + 1
-		self.speedx = self.speedx - 0.1
+		self.speedy = (self.speedy + 1) * gravity
+		self.speedx = self.speedx * gravity
 
-		if (self.x > screen_width) or (self.x < 0) then
-			if bullet1_active == 0 then
-				bullet1_active = 0
-			end
-			if bullet2_active == 0 then
-				bullet2_active = 0
+		if bullet1_active == 1 then
+			-- right Tank
+			if CheckCollision(self.x, self.y,self.x+43, self.y+43, 710, 416, 770, 476) then
+				d = 1
 			end
 		end
-		if (self.y > screen_height) or (self.y < 0) then
-			if bullet1_active == 0 then
-				bullet1_active = 0
+
+		if bullet2_active == 1 then
+			-- left Tank
+			if CheckCollision(self.x, self.y,self.x+43, self.y+43, 10, 416, 70, 476) then
+				d = 1
 			end
-			if bullet2_active == 0 then
-				bullet2_active = 0
-			end
+		end
+
+		-- ground
+		if CheckCollision(self.x, self.y,self.x+43, self.y+43, 0, 450, 800, 30) then
+			d = 1
+		end
+
+		if d == 1 then
+--			self = nil
+			self.image = images["bullet-2"]
 		end
 	end
 
@@ -403,6 +411,7 @@ function load_images()
 		"tree01",
 		"star",
 		"bullet",
+		"bullet-2",
 --		"cloud_plain_1",
 		"cloud_plain_2",
 		"cloud_plain_3",

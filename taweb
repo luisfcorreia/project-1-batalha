@@ -1,0 +1,125 @@
+* [33mcommit 52d243c4d6b2d28f058fb36d72a0d1a0768d7b40[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Sat Apr 9 00:02:49 2011 +0100
+[31m|[m 
+[31m|[m     adicionar mais lógica e um novo gráfico, a bala do canhão
+[31m|[m  
+* [33mcommit 8641aa1d78ec4f02250007d3e4ec40cbfc652ffe[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Fri Apr 8 20:17:19 2011 +0100
+[31m|[m 
+[31m|[m     primeiro uso da bala para a animação do tiro. valores hardcoded para já
+[31m|[m  
+* [33mcommit 7f58cd510705bb808acad904c7b818d7bdcbdc90[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Thu Apr 7 00:32:53 2011 +0100
+[31m|[m 
+[31m|[m     inicio da implementação do processamento da bala
+[31m|[m  
+* [33mcommit 75218f2739e3c2fe6c826afd0c2e30fccd636afc[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Wed Apr 6 00:49:12 2011 +0100
+[31m|[m 
+[31m|[m     adicionar controlo dos turrets via teclas, alterna o tanque com a direcção do jogo
+[31m|[m  
+* [33mcommit 334621d6b015c93270ac334f393f04a5c7715c27[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Apr 5 19:10:08 2011 +0100
+[31m|[m 
+[31m|[m     refactor da rotina de desenho dos tanques
+[31m|[m  
+* [33mcommit 57c0c56897620777ec109982001fd23a962f4330[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Apr 5 18:11:08 2011 +0100
+[31m|[m 
+[31m|[m     reduzir os tanques a 50%
+[31m|[m  
+* [33mcommit 8b0f8a5f74849b0b598f3045dcc962d92da00a7f[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Mon Apr 4 00:06:21 2011 +0100
+[31m|[m 
+[31m|[m     nuvens já mexem de um lado para o outro, mas depois desaparecem :)
+[31m|[m  
+* [33mcommit e789e23a0cdd914bbbfd8cc841acb154a8f3d750[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Sun Apr 3 13:30:09 2011 +0100
+[31m|[m 
+[31m|[m     adicionar volta atrás das núvens
+[31m|[m  
+* [33mcommit 41b981a3d3b584c29b0143abe36a854f03ed6c75[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Mar 29 00:28:54 2011 +0100
+[31m|[m 
+[31m|[m     remove extra file
+[31m|[m  
+* [33mcommit 167c645815e592c062dbd63afe773433d1ac2a81[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Mar 29 00:28:08 2011 +0100
+[31m|[m 
+[31m|[m     minor code cleanup
+[31m|[m  
+* [33mcommit 296eaa6d2a8d508e73189d532c2172796d1b0be5[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Mar 29 00:08:39 2011 +0100
+[31m|[m 
+[31m|[m     early game direction state engine
+[31m|[m  
+* [33mcommit 9f962b44f1199c7d55b08d3a43ebf32b7604483c[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Mon Mar 28 00:43:06 2011 +0100
+[31m|[m 
+[31m|[m     já mostra o QR Code gerado\npassou a proteger o angulo máximo\nseparar objectos para outro file
+[31m|[m  
+* [33mcommit 47f1dcca068276e9f4ec708ae3a46136731d1272[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Mon Mar 28 00:05:38 2011 +0100
+[31m|[m 
+[31m|[m     mais coisas, ainda n funcional
+[31m|[m  
+* [33mcommit e8a7a2e5084c5e65ed770d50f00b7bda511db022[m
+[31m|[m Author: Luis Correia <lfcorreia@hpmini.(none)>
+[31m|[m Date:   Sun Mar 27 13:28:17 2011 +0100
+[31m|[m 
+[31m|[m     add script to create a qrcode with our IP and startup the game
+[31m|[m  
+* [33mcommit 489cf2bc928fe720b7c6f919ca9e52e9add8d729[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Sat Mar 26 16:31:26 2011 +0000
+[31m|[m 
+[31m|[m     adicionar gráficos
+[31m|[m  
+* [33mcommit 5506fed0949dd2da8e540c2fb8b3e3a6e3eb6952[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Mar 8 23:53:26 2011 +0000
+[31m|[m 
+[31m|[m     mais testes
+[31m|[m  
+* [33mcommit 99c3d86f1780bd7fb62167f00c0965581303d80c[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Mar 8 15:18:41 2011 +0000
+[31m|[m 
+[31m|[m     Alterar a porta para 8169 (supostamente não é um serviço conhecido)
+[31m|[m  
+* [33mcommit 28887a3d0ce3adca264ff93ced13f70cd9a8a3a9[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Tue Mar 8 13:29:16 2011 +0000
+[31m|[m 
+[31m|[m      mais coisas
+[31m|[m  
+* [33mcommit f6370ecfd973aeba72f6f5334953a94e0a026827[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Sun Mar 6 13:54:28 2011 +0000
+[31m|[m 
+[31m|[m     Adicionar a lib e corrigir cenas :P
+[31m|[m  
+* [33mcommit 36d498a4b08b9321cc6dac61e907a9387dc8c592[m
+[31m|[m Author: Luis Correia <buga@loide.net>
+[31m|[m Date:   Sun Mar 6 13:14:21 2011 +0000
+[31m|[m 
+[31m|[m     corrigir o texto
+[31m|[m  
+* [33mcommit 474b55d5c2f390c3431769ed971ae270974c19dc[m
+  Author: Luis Correia <buga@loide.net>
+  Date:   Sun Mar 6 13:12:50 2011 +0000
+  
+      Commit inicial

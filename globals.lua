@@ -8,6 +8,9 @@ rad = 0.0174532925
 gamestate = "menu"
 gamestate = "running"
 game_direction = 1
+
+gravity = 1
+
 turret_max_angle = 85
 turret_min_angle = 5
 
