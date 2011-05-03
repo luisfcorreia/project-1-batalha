@@ -4,6 +4,14 @@
 -- utils.lua
 -----------------------------------------------------------
 
+function paint_ground()
+	-- Ground
+	love.graphics.setColor(146, 201, 87)
+	love.graphics.rectangle("fill", 0, 460, 800, 70)
+	love.graphics.setColor(205, 227, 161)
+	love.graphics.rectangle("fill", 0, 450, 800, 10)
+end
+
 -- Collision detection function.
 -- Checks if box1 and box2 overlap.
 -- w and h mean width and height.

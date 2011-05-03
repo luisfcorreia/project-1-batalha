@@ -3,10 +3,11 @@
 -- (C) Luis Correia
 -- main.lua
 -----------------------------------------------------------
+require("utils.lua")
 require("globals.lua")
 require("objects.lua")
 require("network.lua")
-require("utils.lua")
+require("mainmenu.lua")
 
 function love.load()
 
@@ -26,6 +27,8 @@ function love.load()
 	create_object_bullet()
 	
 	init_timers()
+	
+	tank_setup()
 	
    --  Interval value = Animation's Delay time * The number of Animation's frame
    -- 100 ms * 2 frame = 200 ms (Interval)
@@ -58,7 +61,6 @@ function love.load()
 end
 
 function love.keypressed(k)
-	local t
     if love.keyboard.isDown(' ') then
     	if game_direction == 1 then
     		game_direction = 0
@@ -126,7 +128,9 @@ function love.update(dt)
 	lube.server:acceptAll()
 
 	if gamestate == "menu" then
-		--  
+		--
+		tank_update()
+		  
 		--  
 	elseif gamestate == "running" then
 		--
@@ -153,18 +157,17 @@ end
 function love.draw()
 
 	if gamestate == "menu" then
-		--  
+		--
+		paint_ground()
+		tank_draw()
+		  
 		--  
 	elseif gamestate == "running" then
 		--
 		-- draw background objects
 		lists.b:draw()
 		
-		-- Ground
-		love.graphics.setColor(146, 201, 87)
-		love.graphics.rectangle("fill", 0, 460, 800, 70)
-		love.graphics.setColor(205, 227, 161)
-		love.graphics.rectangle("fill", 0, 450, 800, 10)
+		paint_ground()
 		love.graphics.setColor(255, 255, 255)
 		love.graphics.print(myownIP,10,10)
 

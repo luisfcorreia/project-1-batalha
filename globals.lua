@@ -5,8 +5,8 @@
 -----------------------------------------------------------
 
 rad = 0.0174532925
-gamestate = "menu"
 gamestate = "running"
+gamestate = "menu"
 game_direction = 1
 
 gravity = 1
@@ -25,4 +25,9 @@ bullet2_speed = 0
 
 screen_width = love.graphics.getWidth()
 screen_height = love.graphics.getHeight()
+
+
+-- maradisses para o mainmenu :P
+tanque = {}
+
 
