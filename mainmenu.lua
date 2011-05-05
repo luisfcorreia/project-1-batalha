@@ -5,7 +5,7 @@
 -----------------------------------------------------------
 
 function m_tank_draw()
-	love.graphics.draw(images.turret_cannon_00, tanque.x+50, tanque.y-16,50,tanque.scale,tanque.scale,32,32)
+	love.graphics.draw(images.turret_cannon_00, tanque.x+50, tanque.y-16,tanque.angle,tanque.scale,tanque.scale,32,32)
 	love.graphics.draw(images.turret_body, tanque.x+10, tanque.y-40, 0, tanque.scale,tanque.scale,1,1)
 	love.graphics.draw(images.belt_track, tanque.x-37+14, tanque.y-14-3, 0, tanque.scale,tanque.scale,1,1)		
 	love.graphics.draw(images.wheel, tanque.x, tanque.y, 0, tanque.scale,tanque.scale,1,1)
@@ -13,51 +13,48 @@ function m_tank_draw()
 	love.graphics.draw(images.wheel, tanque.x+tanque.i*2, tanque.y, 0, tanque.scale,tanque.scale,1,1)
 	--tanque.belt:draw()
 	for i,b in ipairs(tanque.bteeth) do
-		love.graphics.draw(images.belt_tooth, b.x, b.y, 0, tanque.scale,tanque.scale,1,1)
+		love.graphics.draw(images.belt_tooth, tanque.x + b.x, tanque.y + b.y, 0, tanque.scale,tanque.scale,1,1)
 	end
+end
 
+function m_tank_belt_update(dt)
+	for i,b in ipairs(tanque.bteeth) do
+		b.t = b.t + dt
+		local pi
+		pi = math.pi
+
+		if b.t < tanque.bth then
+			local t = b.t
+			b.x = tanque.bx + tanque.bw * (t/tanque.bth)
+			b.y = tanque.by
+		elseif b.t < tanque.bth + tanque.bta then
+			local t = (tanque.bth + tanque.bta - b.t)
+			b.x = tanque.bx + tanque.bw + math.cos(-pi*t + pi/2)*tanque.br
+			b.y = tanque.by + tanque.br + math.sin(-pi*t + pi/2)*tanque.br
+		elseif b.t < tanque.bth*2 + tanque.bta then
+			local t = (b.t - tanque.bth*2 + tanque.bta)/tanque.bth
+			b.x = tanque.bx + tanque.bw * (2-t)
+			b.y = tanque.by + tanque.bd
+		elseif b.t < tanque.btotal then
+			local t = (tanque.bth*2 + tanque.bta - b.t)
+			b.x = tanque.bx + math.cos(-pi*t + pi/2)*tanque.br
+			b.y = tanque.by + tanque.br + math.sin(-pi*t + pi/2)*tanque.br
+		else
+			b.t = b.t - tanque.btotal
+		end
+	end
 end
 
 function m_tank_update(dt)
-	m_tank_mainx = m_tank_mainx + (1 * dt)
-	tanque.x = m_tank_mainx
-	for i,b in ipairs(self.teeth) do
-		b.t = b.t + dt
-		local pi
-		if dir == 1 then
-			pi = math.pi
-		else
-			pi = -math.pi
-		end
-		if b.t < self.th then
-			local t = b.t
-			b.x = self.x + self.w * (t/self.th)
-			if dir == 1 then
-				b.y = self.y
-			else
-				b.y = self.y + self.d
-			end
-		elseif b.t < self.th + self.ta then
-			local t = (self.th + self.ta - b.t)
-			b.x = self.x + self.w + math.cos(-pi*t + pi/2)*self.r
-			b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
-		elseif b.t < self.th*2 + self.ta then
-			local t = (b.t - self.th*2 + self.ta)/self.th
-			b.x = self.x + self.w * (2-t)
-			if dir == 1 then
-				b.y = self.y + self.d
-			else
-				b.y = self.y
-			end
-		elseif b.t < self.total then
-			local t = (self.th*2 + self.ta - b.t)
-			b.x = self.x + math.cos(-pi*t + pi/2)*self.r
-			b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
-		else
-			b.t = b.t - self.total
-		end
+	m_tank_mainx = m_tank_mainx + (50 * dt)
+
+	if m_tank_mainx >= screen_width then
+		m_tank_mainx = -70
 	end
 
+	tanque.x = m_tank_mainx
+	tanque.angle = tanque.angle + dt*5
+	m_tank_belt_update(dt)
 end
 
 function m_tank_setup()
@@ -86,66 +83,10 @@ function m_tank_setup()
 	tanque.i = 25
 	tanque.bx = tanque.x+14
 	tanque.by = tanque.y-3
+	tanque.bx = 14
+	tanque.by = -3
+	tanque.angle = 50
 	tanque.scale = 0.5
 end
 
---[[
-	Belt.update = function(self, dir, dt)
-		for i,b in ipairs(self.teeth) do
-			b.t = b.t + dt
-			local pi
-			if dir == 1 then
-				pi = math.pi
-			else
-				pi = -math.pi
-			end
-			if b.t < self.th then
-				local t = b.t
-				b.x = self.x + self.w * (t/self.th)
-				if dir == 1 then
-					b.y = self.y
-				else
-					b.y = self.y + self.d
-				end
-			elseif b.t < self.th + self.ta then
-				local t = (self.th + self.ta - b.t)
-				b.x = self.x + self.w + math.cos(-pi*t + pi/2)*self.r
-				b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
-			elseif b.t < self.th*2 + self.ta then
-				local t = (b.t - self.th*2 + self.ta)/self.th
-				b.x = self.x + self.w * (2-t)
-				if dir == 1 then
-					b.y = self.y + self.d
-				else
-					b.y = self.y
-				end
-			elseif b.t < self.total then
-				local t = (self.th*2 + self.ta - b.t)
-				b.x = self.x + math.cos(-pi*t + pi/2)*self.r
-				b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
-			else
-				b.t = b.t - self.total
-			end
-		end
-	end
 
-	Belt.draw = function(self)
-		for i,b in ipairs(self.teeth) do
-			love.graphics.draw(images.belt_tooth, b.x, b.y, 0, self.scale,self.scale,1,1)
-		end
-	end
-end
-
-
-	Tank.draw = function(self)
-		love.graphics.draw(images.turret_cannon_00, self.x+pos, self.y-16,angle,self.scale,self.scale,32,32)
-		love.graphics.draw(images.turret_body, self.x+10, self.y-40, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.belt_track, self.belt.x-37, self.belt.y-14, 0, self.scale,self.scale,1,1)		
-		love.graphics.draw(images.wheel, self.x, self.y, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.wheel, self.x+self.i, self.y, 0, self.scale,self.scale,1,1)
-		love.graphics.draw(images.wheel, self.x+self.i*2, self.y, 0, self.scale,self.scale,1,1)
-		self.belt:draw()
-	end
-
-end
-]]

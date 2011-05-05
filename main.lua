@@ -100,7 +100,7 @@ function love.keypressed(k)
     if love.keyboard.isDown('1') then
     	if game_direction == 1 then
 			if bullet1_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle1,40)
+				local t = Bullet:new(game_direction,turret_angle1,10)
 				t:insert(lists.x)
 				bullet1_active = 1
 			end    
@@ -110,15 +110,25 @@ function love.keypressed(k)
     if love.keyboard.isDown('2') then
     	if game_direction == 0 then
 --			if bullet2_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle2,40)
+				local t = Bullet:new(game_direction,turret_angle2,10)
 				t:insert(lists.x)
 				bullet2_active = 1
 --			end    
 		end    
     end
 
+    if gamestate == "menu" then
+        if love.keyboard.isDown('s') then
+	    gamestate = "running" -- quit the game
+	end
+    end
+
     if love.keyboard.isDown('escape') then
-        love.event.push('q') -- quit the game
+    	if gamestate == "running" then
+	      gamestate = "menu" -- quit the game
+    	elseif gamestate == "menu" then
+           love.event.push('q') -- quit the game
+       end
     end
 end
 
@@ -158,6 +168,8 @@ function love.draw()
 
 	if gamestate == "menu" then
 		--
+		-- draw background objects
+		lists.b:draw()		--
 		paint_ground()
 		m_tank_draw()
 		  
