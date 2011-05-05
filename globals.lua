@@ -3,7 +3,6 @@
 -- (C) Luis Correia
 -- objects.lua
 -----------------------------------------------------------
-
 rad = 0.0174532925
 gamestate = "running"
 gamestate = "menu"
@@ -29,5 +28,5 @@ screen_height = love.graphics.getHeight()
 
 -- maradisses para o mainmenu :P
 tanque = {}
-
+m_tank_mainx = 0
 

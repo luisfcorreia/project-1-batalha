@@ -4,17 +4,63 @@
 -- mainmenu.lua
 -----------------------------------------------------------
 
-function tank_draw()
-
+function m_tank_draw()
+	love.graphics.draw(images.turret_cannon_00, tanque.x+50, tanque.y-16,50,tanque.scale,tanque.scale,32,32)
+	love.graphics.draw(images.turret_body, tanque.x+10, tanque.y-40, 0, tanque.scale,tanque.scale,1,1)
+	love.graphics.draw(images.belt_track, tanque.x-37+14, tanque.y-14-3, 0, tanque.scale,tanque.scale,1,1)		
+	love.graphics.draw(images.wheel, tanque.x, tanque.y, 0, tanque.scale,tanque.scale,1,1)
+	love.graphics.draw(images.wheel, tanque.x+tanque.i, tanque.y, 0, tanque.scale,tanque.scale,1,1)
+	love.graphics.draw(images.wheel, tanque.x+tanque.i*2, tanque.y, 0, tanque.scale,tanque.scale,1,1)
+	--tanque.belt:draw()
+	for i,b in ipairs(tanque.bteeth) do
+		love.graphics.draw(images.belt_tooth, b.x, b.y, 0, tanque.scale,tanque.scale,1,1)
+	end
 
 end
 
-function tank_update()
-
+function m_tank_update(dt)
+	m_tank_mainx = m_tank_mainx + (1 * dt)
+	tanque.x = m_tank_mainx
+	for i,b in ipairs(self.teeth) do
+		b.t = b.t + dt
+		local pi
+		if dir == 1 then
+			pi = math.pi
+		else
+			pi = -math.pi
+		end
+		if b.t < self.th then
+			local t = b.t
+			b.x = self.x + self.w * (t/self.th)
+			if dir == 1 then
+				b.y = self.y
+			else
+				b.y = self.y + self.d
+			end
+		elseif b.t < self.th + self.ta then
+			local t = (self.th + self.ta - b.t)
+			b.x = self.x + self.w + math.cos(-pi*t + pi/2)*self.r
+			b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
+		elseif b.t < self.th*2 + self.ta then
+			local t = (b.t - self.th*2 + self.ta)/self.th
+			b.x = self.x + self.w * (2-t)
+			if dir == 1 then
+				b.y = self.y + self.d
+			else
+				b.y = self.y
+			end
+		elseif b.t < self.total then
+			local t = (self.th*2 + self.ta - b.t)
+			b.x = self.x + math.cos(-pi*t + pi/2)*self.r
+			b.y = self.y + self.r + math.sin(-pi*t + pi/2)*self.r
+		else
+			b.t = b.t - self.total
+		end
+	end
 
 end
 
-function tank_setup()
+function m_tank_setup()
 
 	tanque.br = 15
 

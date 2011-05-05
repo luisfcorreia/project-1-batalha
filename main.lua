@@ -3,11 +3,11 @@
 -- (C) Luis Correia
 -- main.lua
 -----------------------------------------------------------
-require("utils.lua")
 require("globals.lua")
-require("objects.lua")
 require("network.lua")
+require("utils.lua")
 require("mainmenu.lua")
+require("objects.lua")
 
 function love.load()
 
@@ -28,7 +28,7 @@ function love.load()
 	
 	init_timers()
 	
-	tank_setup()
+	m_tank_setup()
 	
    --  Interval value = Animation's Delay time * The number of Animation's frame
    -- 100 ms * 2 frame = 200 ms (Interval)
@@ -129,7 +129,7 @@ function love.update(dt)
 
 	if gamestate == "menu" then
 		--
-		tank_update()
+		m_tank_update(dt)
 		  
 		--  
 	elseif gamestate == "running" then
@@ -159,7 +159,7 @@ function love.draw()
 	if gamestate == "menu" then
 		--
 		paint_ground()
-		tank_draw()
+		m_tank_draw()
 		  
 		--  
 	elseif gamestate == "running" then
