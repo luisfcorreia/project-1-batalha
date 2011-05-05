@@ -36,7 +36,7 @@ function love.load()
 
 	do
 		local t = Bubble:new()
-		t:insert(lists.f)
+		--t:insert(lists.f)
 	end
 
 	do
@@ -119,16 +119,17 @@ function love.keypressed(k)
 
     if gamestate == "menu" then
         if love.keyboard.isDown('s') then
-	    gamestate = "running" -- quit the game
-	end
+		    gamestate = "running" -- quit the game
+		end
+	
     end
 
     if love.keyboard.isDown('escape') then
     	if gamestate == "running" then
-	      gamestate = "menu" -- quit the game
+	    	gamestate = "menu" -- quit the game
     	elseif gamestate == "menu" then
-           love.event.push('q') -- quit the game
-       end
+        	love.event.push('q') -- quit the game
+    	end
     end
 end
 
@@ -140,7 +141,9 @@ function love.update(dt)
 	if gamestate == "menu" then
 		--
 		m_tank_update(dt)
-		  
+		for i,v in pairs(lists) do
+			v:update(dt)
+		end		  
 		--  
 	elseif gamestate == "running" then
 		--
@@ -170,6 +173,7 @@ function love.draw()
 		--
 		-- draw background objects
 		lists.b:draw()		--
+		
 		paint_ground()
 		m_tank_draw()
 		  

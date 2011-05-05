@@ -5,7 +5,7 @@
 -----------------------------------------------------------
 
 function m_tank_draw()
-	love.graphics.draw(images.turret_cannon_00, tanque.x+50, tanque.y-16,tanque.angle,tanque.scale,tanque.scale,32,32)
+	love.graphics.draw(images.turret_cannon_00, tanque.x+50, tanque.y-16,-tanque.angle,tanque.scale,tanque.scale,32,32)
 	love.graphics.draw(images.turret_body, tanque.x+10, tanque.y-40, 0, tanque.scale,tanque.scale,1,1)
 	love.graphics.draw(images.belt_track, tanque.x-37+14, tanque.y-14-3, 0, tanque.scale,tanque.scale,1,1)		
 	love.graphics.draw(images.wheel, tanque.x, tanque.y, 0, tanque.scale,tanque.scale,1,1)
@@ -53,14 +53,13 @@ function m_tank_update(dt)
 	end
 
 	tanque.x = m_tank_mainx
-	tanque.angle = tanque.angle + dt*5
+	tanque.angle = m_tank_angle
+
 	m_tank_belt_update(dt)
 end
 
 function m_tank_setup()
-
 	tanque.br = 15
-
 	tanque.bd = tanque.br*2
 	tanque.bhalf_c = math.pi*tanque.br
 	tanque.bc = 2*tanque.bhalf_c
@@ -71,11 +70,7 @@ function m_tank_setup()
 	tanque.bscale = 0.5
 	tanque.bteeth = {}
 	for i=0,29 do
-		local b = { 
-			x = 0, 
-			y = 0, 
-			t = (tanque.btotal/30)*i
-		}
+		local b = {x = 0, y = 0, t = (tanque.btotal/30)*i}
 		table.insert(tanque.bteeth, b)
 	end
 	tanque.x = 10

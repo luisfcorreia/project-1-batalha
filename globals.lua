@@ -29,4 +29,5 @@ screen_height = love.graphics.getHeight()
 -- maradisses para o mainmenu :P
 tanque = {}
 m_tank_mainx = 0
+m_tank_angle = 1
 
