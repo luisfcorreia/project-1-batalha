@@ -238,11 +238,19 @@ function create_object_bullet()
 		-- right Tank
 		if CheckCollision(self.x, self.y, 34, 34, 710, 400, 80, 80) then
 			d = 1
+			tank2_shield = tank2_shield - 1 
+			if tank2_shield == 0 then 
+				gamestate = "gamewon"
+			end
 		end
 
 		-- left Tank
 		if CheckCollision(self.x, self.y, 34, 34, 10, 400, 80, 80) then
 			d = 1
+			tank1_shield = tank1_shield - 1 
+			if tank1_shield == 0 then 
+				gamestate = "gamelost"
+			end
 		end
 
 		-- ground

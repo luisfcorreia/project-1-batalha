@@ -25,9 +25,15 @@ bullet2_speed = 0
 screen_width = love.graphics.getWidth()
 screen_height = love.graphics.getHeight()
 
+tank1_shield = 200
+tank2_shield = 200
 
 -- maradisses para o mainmenu :P
 tanque = {}
 m_tank_mainx = 0
 m_tank_angle = 1
 
+function init_globals()
+	tank1_shield = 200
+	tank2_shield = 200
+end

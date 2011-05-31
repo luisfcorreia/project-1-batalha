@@ -150,6 +150,7 @@ function love.update(dt)
 		for i,v in pairs(lists) do
 			v:update(dt)
 		end		  
+		init_globals()
 		--  
 	elseif gamestate == "running" then
 		--
@@ -164,9 +165,19 @@ function love.update(dt)
 		--
 	elseif gamestate == "gamewon" then
 		--
+
 		--
 	elseif gamestate == "gamelost" then
 		--
+		love.graphics.setColor(123, 123, 255, 255)
+		love.graphics.print("Tank 2 WINS!",10,10)
+		-- Ground
+		love.graphics.setColor(146, 201, 87, 255)
+		love.graphics.rectangle("fill", 0, 460, 800, 70)
+		love.graphics.setColor(205, 227, 161, 255)
+		love.graphics.rectangle("fill", 0, 450, 800, 10)
+		-- reset colos
+
 		--
 	end
 
@@ -199,6 +210,8 @@ function love.draw()
 
 		-- draw foreground objects
 		lists.f:draw()
+		
+		paint_shield_bars()
 
 		--
 	elseif gamestate == "gamewon" then

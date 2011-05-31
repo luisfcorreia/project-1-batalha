@@ -39,6 +39,23 @@ function random_force()
 	return math.random(26,27)
 end
 
+function paint_shield_bars()
+	-- left bar
+	love.graphics.setColor(225,225,225,255)
+	love.graphics.rectangle("fill", 20, 20, 200, 20)
+	love.graphics.setColor(128,128,128,255)
+	love.graphics.rectangle("fill", 20, 20, tank1_shield, 20)
+
+	-- right bar
+	love.graphics.setColor(225,225,225,255)
+	love.graphics.rectangle("fill", 580, 20, 200, 20)
+	love.graphics.setColor(128,128,128,255)
+	love.graphics.rectangle("fill", 580 + (200 - tank2_shield), 20, tank2_shield, 20)	-- 
+	
+	love.graphics.setColor(255, 255, 255, 255)
+end
+
+
 
 
 
