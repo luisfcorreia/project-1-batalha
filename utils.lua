@@ -6,10 +6,12 @@
 
 function paint_ground()
 	-- Ground
-	love.graphics.setColor(146, 201, 87)
+	love.graphics.setColor(146, 201, 87, 255)
 	love.graphics.rectangle("fill", 0, 460, 800, 70)
-	love.graphics.setColor(205, 227, 161)
+	love.graphics.setColor(205, 227, 161, 255)
 	love.graphics.rectangle("fill", 0, 450, 800, 10)
+	-- reset colos
+	love.graphics.setColor(255, 255, 255, 255)
 end
 
 -- Collision detection function.
@@ -26,6 +28,18 @@ function CheckCollision(box1x, box1y, box1w, box1h, box2x, box2y, box2w, box2h)
         return true                 -- Yes collision. Ouch!
     end
 end
+
+function random_angle()
+--	return math.random(15,55)
+	return math.random(50,55)
+end
+
+function random_force()
+--	return math.random(10,30)
+	return math.random(26,27)
+end
+
+
 
 
 --[[

@@ -223,6 +223,7 @@ function create_object_bullet()
 		o.angley = math.cos(angulo)
 		o.speedx = force * o.anglex
 		o.speedy = force * o.angley
+		o.alpha = 255
 		setmetatable(o, Bullet)
 		return o
 	end
@@ -234,32 +235,31 @@ function create_object_bullet()
 		self.speedy = (self.speedy + 1) * gravity
 		self.speedx = self.speedx * gravity
 
-		if bullet1_active == 1 then
-			-- right Tank
-			if CheckCollision(self.x, self.y,self.x+43, self.y+43, 710, 416, 770, 476) then
-				d = 1
-			end
+		-- right Tank
+		if CheckCollision(self.x, self.y, 34, 34, 710, 400, 80, 80) then
+			d = 1
 		end
 
-		if bullet2_active == 1 then
-			-- left Tank
-			if CheckCollision(self.x, self.y,self.x+43, self.y+43, 10, 416, 70, 476) then
-				d = 1
-			end
+		-- left Tank
+		if CheckCollision(self.x, self.y, 34, 34, 10, 400, 80, 80) then
+			d = 1
 		end
 
 		-- ground
-		if CheckCollision(self.x, self.y,self.x+43, self.y+43, 0, 450, 800, 30) then
+		if CheckCollision(self.x, self.y, 34, 34, 0, 470, 800, 30) then
 			d = 1
 		end
 
 		if d == 1 then
 --			self = nil
 			self.image = images["bullet-2"]
+		else
+			self.image = images["bullet"]
 		end
 	end
 
 	Bullet.draw = function(self)
+		love.graphics.setColor(255, 255, 255, 255)
 		love.graphics.draw(self.image, self.x, self.y,1,self.scale,self.scale)
 	end
 end

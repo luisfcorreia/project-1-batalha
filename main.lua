@@ -14,6 +14,7 @@ function love.load()
 	server_start(8169)
 
 	love.graphics.setBackgroundColor(0x84, 0xca, 0xff)
+	love.graphics.setColor(255, 255, 255, 255)
 
 	load_images()
 
@@ -64,8 +65,10 @@ function love.keypressed(k)
     if love.keyboard.isDown(' ') then
     	if game_direction == 1 then
     		game_direction = 0
+    		bullet1_active = 0
     	else
 	    	game_direction = 1
+    		bullet2_active = 0
 	    end
     end
 --    if k == 'up' then
@@ -110,7 +113,10 @@ function love.keypressed(k)
     if love.keyboard.isDown('2') then
     	if game_direction == 0 then
 --			if bullet2_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle2,10)
+
+				turret_angle2 = random_angle()
+				
+				local t = Bullet:new(game_direction,turret_angle2,random_force())
 				t:insert(lists.x)
 				bullet2_active = 1
 --			end    
@@ -183,17 +189,16 @@ function love.draw()
 		-- draw background objects
 		lists.b:draw()
 		
-		paint_ground()
-		love.graphics.setColor(255, 255, 255)
-		love.graphics.print(myownIP,10,10)
-
-	
-		-- draw foreground objects
-		lists.f:draw()
 
 		-- draw bullets
 		lists.x:draw()
-		
+			
+		paint_ground()
+		--love.graphics.setColor(255, 255, 255)
+		--love.graphics.print(myownIP,10,10)
+
+		-- draw foreground objects
+		lists.f:draw()
 
 		--
 	elseif gamestate == "gamewon" then
