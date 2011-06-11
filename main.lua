@@ -11,8 +11,6 @@ require("objects.lua")
 
 function love.load()
 
-	server_start(8169)
-
 	love.graphics.setBackgroundColor(0x84, 0xca, 0xff)
 	love.graphics.setColor(255, 255, 255, 255)
 
@@ -103,7 +101,7 @@ function love.keypressed(k)
     if love.keyboard.isDown('1') then
     	if game_direction == 1 then
 			if bullet1_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle1,10)
+				local t = Bullet:new(game_direction,turret_angle1,turret_force1)
 				t:insert(lists.x)
 				bullet1_active = 1
 			end    
@@ -141,9 +139,6 @@ end
 
 function love.update(dt)
 
-	lube.server:update(dt)
-	lube.server:acceptAll()
-
 	if gamestate == "menu" then
 		--
 		m_tank_update(dt)
@@ -153,6 +148,17 @@ function love.update(dt)
 		init_globals()
 		--  
 	elseif gamestate == "running" then
+
+		if server_started == 0 then
+			server_start(8169)
+			server_started = 1
+		end
+
+		if server_started == 1 then
+			lube.server:update(dt)
+			lube.server:acceptAll()
+		end
+
 		--
 		for i,v in pairs(timers) do 
 			v:update(dt)
@@ -176,9 +182,7 @@ function love.update(dt)
 		love.graphics.rectangle("fill", 0, 460, 800, 70)
 		love.graphics.setColor(205, 227, 161, 255)
 		love.graphics.rectangle("fill", 0, 450, 800, 10)
-		-- reset colos
-
-		--
+		-- reset colors
 	end
 
 	love.timer.sleep(10)
@@ -196,6 +200,7 @@ function love.draw()
 		  
 		--  
 	elseif gamestate == "running" then
+	
 		--
 		-- draw background objects
 		lists.b:draw()

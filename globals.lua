@@ -7,6 +7,7 @@ rad = 0.0174532925
 gamestate = "running"
 gamestate = "menu"
 game_direction = 1
+server_started = 0
 
 gravity = 1
 

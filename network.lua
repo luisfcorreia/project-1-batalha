@@ -39,9 +39,20 @@ end
 
 function updatedata(data, ip, port)
 	-- processar os dados que vem do android
-	turret_angle1 = tonumber(data)
-	if turret_angle1 >= turret_max_angle1 then
-		turret_angle1 = turret_max_angle1
-	end
+	if data ~= nil then
+		dados = {}
+		dados = string.split(data,"+")
+	
+		turret_force1 = tonumber(dados[1])/2
+		turret_angle1 = tonumber(dados[2])
+
+		if turret_angle1 >= turret_max_angle then
+			turret_angle1 = turret_max_angle
+		end
+		
+		local t = Bullet:new(game_direction,turret_angle1,turret_force1)
+		t:insert(lists.x)
+		
+	end	
 end
 
