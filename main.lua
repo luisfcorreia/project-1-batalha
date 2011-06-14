@@ -210,12 +210,13 @@ function love.draw()
 		lists.f:draw()
 		
 		paint_shield_bars()
-
+		
+--[[
 		-- debug tank position
 		love.graphics.setColor(123, 123, 255, 50)
 		love.graphics.rectangle("fill",   5, 385, 90, 65)
 		love.graphics.rectangle("fill", 705, 385, 90, 65)
-		
+]]--		
 
 		--
 	elseif gamestate == "gamewon" then

@@ -13,6 +13,6 @@ function love.conf(t)
 	t.modules.font = true
 	t.screen.width = 800
 	t.screen.height = 480
---	t.screen.fullscreen = true
+	t.screen.fullscreen = true
 end
 

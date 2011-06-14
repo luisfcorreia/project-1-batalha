@@ -211,12 +211,12 @@ function create_object_bullet()
 			angulo = (270 - angle) * rad
 			bullet2_active = 1
 			o.x = 740  
-			o.y = 388
+			o.y = 370
 		else
 			angulo = (90 + angle) * rad
 			bullet1_active = 1
 			o.x = 50 +25 
-			o.y = 388 
+			o.y = 370 
 		end
 		o.scale = 0.5
 		o.anglex = math.sin(angulo)
@@ -242,7 +242,7 @@ function create_object_bullet()
 
 		-- right Tank
 --		if CheckCollision(self.x, self.y, 34, 34, 710, 400, 80, 80) then
-		if CheckCollision(self.x, self.y, 34, 34, 705, 385, 90, 65) then
+		if game_direction == 1 and CheckCollision(self.x, self.y, 34, 34, 705, 385, 90, 65) then
 			d = 1
 			tank2_shield = tank2_shield - 1 
 			if tank2_shield == 0 then 
@@ -252,19 +252,19 @@ function create_object_bullet()
 
 		-- left Tank
 --		if CheckCollision(self.x, self.y, 34, 34, 10, 400, 80, 80) then
-		if CheckCollision(self.x, self.y, 34, 34,  5, 385, 90, 65) then
+		if game_direction == 0 and CheckCollision(self.x, self.y, 34, 34,  5, 385, 90, 65) then
 			d = 1
 			tank1_shield = tank1_shield - 1 
 			if tank1_shield == 0 then 
 				gamestate = "gamelost"
 			end
 		end
-
+--[[
 		-- ground
 		if CheckCollision(self.x, self.y, 34, 34, 0, 470, 800, 30) then
 			d = 1
 		end
-
+]]--
 		if d == 1 then
 --			self = nil
 			self.image = images["bullet-2"]
