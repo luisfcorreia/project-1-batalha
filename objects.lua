@@ -235,8 +235,14 @@ function create_object_bullet()
 		self.speedy = (self.speedy + 1) * gravity
 		self.speedx = self.speedx * gravity
 
+
+--		love.graphics.rectangle("fill",   5, 385, 90, 65)
+--		love.graphics.rectangle("fill", 705, 385, 90, 65)
+
+
 		-- right Tank
-		if CheckCollision(self.x, self.y, 34, 34, 710, 400, 80, 80) then
+--		if CheckCollision(self.x, self.y, 34, 34, 710, 400, 80, 80) then
+		if CheckCollision(self.x, self.y, 34, 34, 705, 385, 90, 65) then
 			d = 1
 			tank2_shield = tank2_shield - 1 
 			if tank2_shield == 0 then 
@@ -245,7 +251,8 @@ function create_object_bullet()
 		end
 
 		-- left Tank
-		if CheckCollision(self.x, self.y, 34, 34, 10, 400, 80, 80) then
+--		if CheckCollision(self.x, self.y, 34, 34, 10, 400, 80, 80) then
+		if CheckCollision(self.x, self.y, 34, 34,  5, 385, 90, 65) then
 			d = 1
 			tank1_shield = tank1_shield - 1 
 			if tank1_shield == 0 then 

@@ -168,21 +168,14 @@ function love.update(dt)
 			v:update(dt)
 		end
 		
+		
 		--
 	elseif gamestate == "gamewon" then
 		--
-
-		--
+		-- reset colors		--
 	elseif gamestate == "gamelost" then
 		--
-		love.graphics.setColor(123, 123, 255, 255)
-		love.graphics.print("Tank 2 WINS!",10,10)
-		-- Ground
-		love.graphics.setColor(146, 201, 87, 255)
-		love.graphics.rectangle("fill", 0, 460, 800, 70)
-		love.graphics.setColor(205, 227, 161, 255)
-		love.graphics.rectangle("fill", 0, 450, 800, 10)
-		-- reset colors
+		--
 	end
 
 	love.timer.sleep(10)
@@ -218,12 +211,33 @@ function love.draw()
 		
 		paint_shield_bars()
 
+		-- debug tank position
+		love.graphics.setColor(123, 123, 255, 50)
+		love.graphics.rectangle("fill",   5, 385, 90, 65)
+		love.graphics.rectangle("fill", 705, 385, 90, 65)
+		
+
 		--
 	elseif gamestate == "gamewon" then
 		--
+		love.graphics.setColor(123, 123, 255, 255)
+		love.graphics.print("Tank 1 WINS!",10,10)
+		-- Ground
+		love.graphics.setColor(146, 201, 87, 255)
+		love.graphics.rectangle("fill", 0, 460, 800, 70)
+		love.graphics.setColor(205, 227, 161, 255)
+		love.graphics.rectangle("fill", 0, 450, 800, 10)
 		--
 	elseif gamestate == "gamelost" then
 		--
+		love.graphics.setColor(123, 123, 255, 255)
+		love.graphics.print("Tank 2 WINS!",10,10)
+		-- Ground
+		love.graphics.setColor(146, 201, 87, 255)
+		love.graphics.rectangle("fill", 0, 460, 800, 70)
+		love.graphics.setColor(205, 227, 161, 255)
+		love.graphics.rectangle("fill", 0, 450, 800, 10)
+		-- reset colors
 		--
 	end
 
