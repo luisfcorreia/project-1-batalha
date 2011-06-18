@@ -15,6 +15,15 @@ function m_tank_draw()
 	for i,b in ipairs(tanque.bteeth) do
 		love.graphics.draw(images.belt_tooth, tanque.x + b.x, tanque.y + b.y, 0, tanque.scale,tanque.scale,1,1)
 	end
+	
+	love.graphics.setColor(123, 123, 123, 50)
+	love.graphics.rectangle("fill",   20, 20, 760, 200)
+
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.draw(images.droid, 25, 25,0,1,1,1,1)
+	love.graphics.draw(images.ownip, 650, 190,0,1,1,1,1)
+	
+	love.graphics.setColor(255, 255, 255)
 end
 
 function m_tank_belt_update(dt)
@@ -56,6 +65,7 @@ function m_tank_update(dt)
 	tanque.angle = m_tank_angle
 
 	m_tank_belt_update(dt)
+	
 end
 
 function m_tank_setup()

@@ -30,13 +30,13 @@ function CheckCollision(box1x, box1y, box1w, box1h, box2x, box2y, box2w, box2h)
 end
 
 function random_angle()
---	return math.random(15,55)
-	return math.random(50,55)
+	return math.random(15,70)
+--	return math.random(50,55)
 end
 
 function random_force()
 --	return math.random(10,30)
-	return math.random(26,27)
+	return math.random(20,35)
 end
 
 function paint_shield_bars()

@@ -23,6 +23,9 @@ bullet1_speed = 0
 bullet2_active = 0
 bullet2_speed = 0
 
+bullet_fired = 5
+bullet_dt = 5
+
 screen_width = love.graphics.getWidth()
 screen_height = love.graphics.getHeight()
 

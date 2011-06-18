@@ -57,6 +57,10 @@ function love.load()
 		v:update(10)
 	end
 
+	if server_started == 0 then
+		server_start(8169)
+		server_started = 1
+	end
 end
 
 function love.keypressed(k)
@@ -70,43 +74,6 @@ function love.keypressed(k)
 	    end
     end
 --    if k == 'up' then
-    
-    if love.keyboard.isDown('up') then
-    	if game_direction == 1 then
-		    turret_angle1 = turret_angle1 + 1
-		    if turret_angle1 >= turret_max_angle then
-		    	turret_angle1 = turret_max_angle
-		    end
-    	else
-		    turret_angle2 = turret_angle2 + 1
-		    if turret_angle2 >= turret_max_angle then
-		    	turret_angle2 = turret_max_angle
-		    end
-	    end
-    end
-    if love.keyboard.isDown('down') then
-    	if game_direction == 1 then
-		    turret_angle1 = turret_angle1 - 1
-		    if turret_angle1 <= turret_min_angle then
-		    	turret_angle1 = turret_min_angle
-		    end
-    	else
-		    turret_angle2 = turret_angle2 - 1
-		    if turret_angle2 <= turret_min_angle then
-		    	turret_angle2 = turret_min_angle
-		    end
-	    end
-    end
-
-    if love.keyboard.isDown('1') then
-    	if game_direction == 1 then
-			if bullet1_active == 0 then
-				local t = Bullet:new(game_direction,turret_angle1,turret_force1)
-				t:insert(lists.x)
-				bullet1_active = 1
-			end    
-		end    
-    end
 
     if love.keyboard.isDown('2') then
     	if game_direction == 0 then
@@ -139,6 +106,12 @@ end
 
 function love.update(dt)
 
+	if server_started == 1 then
+		lube.server:update(dt)
+		lube.server:acceptAll()
+	end
+
+
 	if gamestate == "menu" then
 		--
 		m_tank_update(dt)
@@ -148,17 +121,7 @@ function love.update(dt)
 		init_globals()
 		--  
 	elseif gamestate == "running" then
-
-		if server_started == 0 then
-			server_start(8169)
-			server_started = 1
-		end
-
-		if server_started == 1 then
-			lube.server:update(dt)
-			lube.server:acceptAll()
-		end
-
+	
 		--
 		for i,v in pairs(timers) do 
 			v:update(dt)
@@ -168,7 +131,33 @@ function love.update(dt)
 			v:update(dt)
 		end
 		
+		if game_direction == 0 then
 		
+			bullet_dt = bullet_dt + dt
+		
+			if math.floor(bullet_dt % 5) == 1 then
+		
+				bullet_dt = 0
+		
+				if bullet_fired == 0 then
+
+					game_direction = 1
+					bullet_fired = 5
+
+				else
+
+					bullet_fired = bullet_fired - 1
+			
+					turret_angle2 = random_angle()
+	
+					local t = Bullet:new(game_direction,turret_angle2,random_force())
+					t:insert(lists.x)
+					bullet2_active = 1
+
+				end
+			end
+		
+		end
 		--
 	elseif gamestate == "gamewon" then
 		--
@@ -197,14 +186,11 @@ function love.draw()
 		--
 		-- draw background objects
 		lists.b:draw()
-		
 
 		-- draw bullets
 		lists.x:draw()
 			
 		paint_ground()
-		--love.graphics.setColor(255, 255, 255)
-		--love.graphics.print(myownIP,10,10)
 
 		-- draw foreground objects
 		lists.f:draw()
